@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+//amal
 
 public class Skieur {
     @Id
