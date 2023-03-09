@@ -31,13 +31,13 @@ public class PisteController {
     }
 
     @DeleteMapping("{numpiste}")
-    public void update(@PathVariable long numpiste)
+    public void delete(@PathVariable Long numpiste)
     {
         p.removePiste(numpiste);
     }
 
-    @GetMapping("{nummpiste}")
-    public Piste getById(@PathVariable long numpiste)
+    @GetMapping("{numpiste}")
+    public Piste getById(@PathVariable Long numpiste)
     {
         return p.retrievePiste(numpiste);
     }

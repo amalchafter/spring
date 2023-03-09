@@ -26,8 +26,8 @@ public class Cours {
    private Support support;
    private float prix;
     private int creneau;
-    @Transient
-   private int sc;
+   // @Transient
+   //private int sc;
     @OneToMany(mappedBy = "cours",cascade = CascadeType.REMOVE)
     private List<Inscription> inscriptions;
 }

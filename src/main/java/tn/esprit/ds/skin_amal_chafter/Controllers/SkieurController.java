@@ -43,4 +43,9 @@ SkieurController {
         sk.removeSkieur(numSkieur);
     }
 
+    @PutMapping("{numSkieur}/{numPiste}")
+    public Skieur assignSkierToPiste(@PathVariable Long numSkieur, @PathVariable Long numPiste)
+    {
+        return sk.assignSkierToPiste(numSkieur,numPiste);
+    }
 }

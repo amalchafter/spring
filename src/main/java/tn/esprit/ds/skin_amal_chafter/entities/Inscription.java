@@ -1,5 +1,6 @@
 package tn.esprit.ds.skin_amal_chafter.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,6 @@ public class Inscription {
     private Cours cours;
 
     @ManyToOne
+    @JsonIgnore
     private Skieur skieurs;
 }

@@ -1,5 +1,6 @@
 package tn.esprit.ds.skin_amal_chafter.services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.ds.skin_amal_chafter.entities.Piste;
@@ -7,6 +8,7 @@ import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
 import tn.esprit.ds.skin_amal_chafter.repositories.PisteRepository;
 
 import java.util.List;
+@AllArgsConstructor
 
 @Service
 public class ServicePiste implements IServicePiste{
@@ -22,7 +24,6 @@ public class ServicePiste implements IServicePiste{
         return p.save(piste);
 
     }
-
     @Override
     public Piste updatePiste(Piste piste) {
         return p.save(piste);
