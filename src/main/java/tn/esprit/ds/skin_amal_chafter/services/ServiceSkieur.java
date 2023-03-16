@@ -3,12 +3,18 @@ package tn.esprit.ds.skin_amal_chafter.services;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import tn.esprit.ds.skin_amal_chafter.entities.Abonnement;
 import tn.esprit.ds.skin_amal_chafter.entities.Piste;
 import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
+import tn.esprit.ds.skin_amal_chafter.entities.TypeAbonnement;
+import tn.esprit.ds.skin_amal_chafter.repositories.AbonnementRepository;
 import tn.esprit.ds.skin_amal_chafter.repositories.PisteRepository;
 import tn.esprit.ds.skin_amal_chafter.repositories.SkieurRepository;
 
 import java.util.List;
+import java.util.Set;
+
 @AllArgsConstructor
 @Service
 public class ServiceSkieur implements  IServiceSkieur{
@@ -16,6 +22,8 @@ public class ServiceSkieur implements  IServiceSkieur{
     SkieurRepository sk;
     @Autowired
     PisteRepository p;
+    @Autowired
+    AbonnementRepository a;
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return sk.findAll();
@@ -49,7 +57,7 @@ public class ServiceSkieur implements  IServiceSkieur{
         if(skieur !=null && piste != null)
         {
             //skieur.getPistes().add(piste);
-            List<Piste>pistes=skieur.getPistes();
+            Set<Piste> pistes=skieur.getPistes();
             pistes.add(piste);
             skieur.setPistes(pistes);
            return sk.save(skieur);
@@ -59,8 +67,26 @@ public class ServiceSkieur implements  IServiceSkieur{
 
     @Override
     public Skieur assignSkierToAbonnement(Long numSkieur, Long numAbon) {
-        return null;
+       Skieur skieur= sk.findById(numSkieur).orElse(null);
+        Assert.notNull(skieur,"skieur not found");
+        Abonnement abonnement = a.findById(numAbon).orElse(null);
+        Assert.notNull(abonnement,"abonnement not found");
+        skieur.setAbonnements(abonnement);
+
+        return sk.save(skieur);
     }
+
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbon) {
+        return sk.findSkieursByAbonnements_TypeAbon(typeAbon);
+    }
+
+   /* @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+        return sk.findByAbonnementsTypeAbon(typeAbonnement);
+    }*/
+
+
 
 
 }

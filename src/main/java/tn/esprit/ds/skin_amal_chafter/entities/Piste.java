@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -25,6 +26,6 @@ public class Piste {
    private int pente;
     @ManyToMany(mappedBy = "pistes",cascade =CascadeType.REMOVE)
     @JsonIgnore
-    private List<Skieur> skieurs ;
+    private Set<Skieur> skieurs ;
 
 }

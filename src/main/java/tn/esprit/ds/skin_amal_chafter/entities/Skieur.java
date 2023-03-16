@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -27,10 +28,10 @@ public class Skieur {
    private Abonnement abonnements;
 
    @OneToMany(mappedBy = "skieurs")
-   private List<Inscription> inscriptions;
+   private Set<Inscription> inscriptions;
 
    @ManyToMany
-   private List<Piste> pistes;
+   private Set<Piste> pistes;
 
 
 }

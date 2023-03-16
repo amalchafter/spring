@@ -3,6 +3,7 @@ package tn.esprit.ds.skin_amal_chafter.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
+import tn.esprit.ds.skin_amal_chafter.entities.TypeAbonnement;
 import tn.esprit.ds.skin_amal_chafter.services.IServiceSkieur;
 import tn.esprit.ds.skin_amal_chafter.services.ServiceSkieur;
 
@@ -10,8 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/skieur")
-public class
-SkieurController {
+public class SkieurController {
     @Autowired
     IServiceSkieur sk;
     //localhost:9090/retrieveAllSkieurs
@@ -48,4 +48,21 @@ SkieurController {
     {
         return sk.assignSkierToPiste(numSkieur,numPiste);
     }
+
+   /* @GetMapping("amal/{typeAbonnement}")
+    public List<Skieur> retrieveSkiersBySubscriptionType(@PathVariable TypeAbonnement typeAbonnement)
+    {
+        return sk.retrieveSkiersBySubscriptionType(typeAbonnement);
+    }*/
+    @PutMapping("a/{numSkieur}/{numAbon}")
+    public Skieur assignSkierToAbonnement(@PathVariable Long numSkieur, @PathVariable Long numAbon)
+    {
+        return sk.assignSkierToAbonnement(numSkieur,numAbon);
+    }
+    @GetMapping("s/{typeAbon}")
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbon)
+    {
+        return sk.retrieveSkiersBySubscriptionType(typeAbon);
+    }
+
 }

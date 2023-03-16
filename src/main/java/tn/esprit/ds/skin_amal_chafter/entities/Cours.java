@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -29,5 +30,5 @@ public class Cours {
    // @Transient
    //private int sc;
     @OneToMany(mappedBy = "cours",cascade = CascadeType.REMOVE)
-    private List<Inscription> inscriptions;
+    private Set<Inscription> inscriptions;
 }

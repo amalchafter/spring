@@ -3,9 +3,12 @@ package tn.esprit.ds.skin_amal_chafter.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.ds.skin_amal_chafter.entities.Abonnement;
+import tn.esprit.ds.skin_amal_chafter.entities.TypeAbonnement;
 import tn.esprit.ds.skin_amal_chafter.repositories.AbonnementRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 
@@ -35,5 +38,15 @@ public class ServiceAbonnement implements  IServiceAbonnement{
     @Override
     public Abonnement retrieveAbonnement(Long numAbon) {
         return a.findById(numAbon).orElse(null);
+    }
+
+    @Override
+    public Set<Abonnement> getSubscriptionByType(TypeAbonnement typeAbon) {
+        return a.findAbonnementByTypeAbon(typeAbon);
+    }
+
+    @Override
+    public List<Abonnement> retrieveSubscriptionsByDates(LocalDate dateDebut, LocalDate dateFin) {
+        return a.findAbonnementByDateDabutAndDateFin(dateDebut,dateFin);
     }
 }

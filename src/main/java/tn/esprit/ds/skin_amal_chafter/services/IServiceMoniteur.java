@@ -12,4 +12,5 @@ public interface IServiceMoniteur {
     Moniteur updateMoniteur (Moniteur moniteur);
     void removeMoniteur (Long numMoniteur);
     Moniteur retrieveMoniteur (Long numMoniteur);
+
 }
