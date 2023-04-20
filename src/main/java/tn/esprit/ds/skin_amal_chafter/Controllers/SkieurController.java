@@ -2,8 +2,7 @@ package tn.esprit.ds.skin_amal_chafter.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
-import tn.esprit.ds.skin_amal_chafter.entities.TypeAbonnement;
+import tn.esprit.ds.skin_amal_chafter.entities.*;
 import tn.esprit.ds.skin_amal_chafter.services.IServiceSkieur;
 import tn.esprit.ds.skin_amal_chafter.services.ServiceSkieur;
 
@@ -65,4 +64,14 @@ public class SkieurController {
         return sk.retrieveSkiersBySubscriptionType(typeAbon);
     }
 
+    @GetMapping("d/{typeCours}/{support}/{couleur}")
+    public    List<Skieur>findByInscriptionsCoursTypeCoursSupportAAndPistesCouleur(@PathVariable TypeCours typeCours, @PathVariable Support support,@PathVariable Couleur couleur)
+    {
+        return sk.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(typeCours,support,couleur);
+    }
+   @GetMapping("p/{support}/{nom}")
+    public List<Skieur> AmalJPQL(Support support, String nom)
+    {
+        return sk.AmalJPQL(support,nom);
+    }
 }

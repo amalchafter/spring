@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import tn.esprit.ds.skin_amal_chafter.entities.Abonnement;
-import tn.esprit.ds.skin_amal_chafter.entities.Piste;
-import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
-import tn.esprit.ds.skin_amal_chafter.entities.TypeAbonnement;
+import tn.esprit.ds.skin_amal_chafter.entities.*;
 import tn.esprit.ds.skin_amal_chafter.repositories.AbonnementRepository;
 import tn.esprit.ds.skin_amal_chafter.repositories.PisteRepository;
 import tn.esprit.ds.skin_amal_chafter.repositories.SkieurRepository;
@@ -81,12 +78,15 @@ public class ServiceSkieur implements  IServiceSkieur{
         return sk.findSkieursByAbonnements_TypeAbon(typeAbon);
     }
 
-   /* @Override
-    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
-        return sk.findByAbonnementsTypeAbon(typeAbonnement);
-    }*/
+    @Override
+    public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours typeCours, Support support, Couleur couleur) {
+        return sk.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(typeCours,support,couleur);
+    }
 
-
+    @Override
+    public List<Skieur> AmalJPQL(Support support, String nom) {
+        return sk.AmalJPQL(support,nom);
+    }
 
 
 }
