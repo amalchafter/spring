@@ -7,6 +7,7 @@ import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
 import tn.esprit.ds.skin_amal_chafter.repositories.CoursRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ServiceCours implements IServiceCours{
@@ -36,5 +37,10 @@ public class ServiceCours implements IServiceCours{
     @Override
     public Cours retrieveCours(Long numCours) {
         return c.findById(numCours).orElse(null);
+    }
+
+    @Override
+    public Set<Cours> findCoursByInscriptionsSQL() {
+        return c.findCoursByInscriptionsSQL();
     }
 }

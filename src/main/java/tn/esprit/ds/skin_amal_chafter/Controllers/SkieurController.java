@@ -74,4 +74,11 @@ public class SkieurController {
     {
         return sk.AmalJPQL(support,nom);
     }
+
+
+    @PostMapping("aadski")
+    public Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur)
+    {
+        return sk.addSkierAndAssignToCourse(skieur);
+    }
 }

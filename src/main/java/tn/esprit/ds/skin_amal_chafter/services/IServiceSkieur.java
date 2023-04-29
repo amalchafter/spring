@@ -20,4 +20,6 @@ public interface IServiceSkieur {
    List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours typeCours, Support support, Couleur couleur);
     List<Skieur>AmalJPQL(@Param("support") Support support, @Param("nom") String nom);
 
+    Skieur addSkierAndAssignToCourse(Skieur skier);
+
 }

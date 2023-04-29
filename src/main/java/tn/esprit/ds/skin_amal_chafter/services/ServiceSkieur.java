@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import tn.esprit.ds.skin_amal_chafter.entities.*;
-import tn.esprit.ds.skin_amal_chafter.repositories.AbonnementRepository;
-import tn.esprit.ds.skin_amal_chafter.repositories.PisteRepository;
-import tn.esprit.ds.skin_amal_chafter.repositories.SkieurRepository;
+import tn.esprit.ds.skin_amal_chafter.repositories.*;
 
 import java.util.List;
 import java.util.Set;
@@ -21,6 +19,12 @@ public class ServiceSkieur implements  IServiceSkieur{
     PisteRepository p;
     @Autowired
     AbonnementRepository a;
+
+    @Autowired
+    CoursRepository c;
+
+    @Autowired
+    InscriptionRepository i;
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return sk.findAll();
@@ -86,6 +90,26 @@ public class ServiceSkieur implements  IServiceSkieur{
     @Override
     public List<Skieur> AmalJPQL(Support support, String nom) {
         return sk.AmalJPQL(support,nom);
+    }
+
+    @Override
+    public Skieur addSkierAndAssignToCourse(Skieur skieur) {
+        Assert.notNull(skieur.getAbonnements(),"Abonnement must be entered!!!"); //vérifier si l'objet abonn existe
+        Assert.notNull(skieur.getInscriptions(),"Inscription must be entered!!!!");
+        Set<Inscription> inscriptions=skieur.getInscriptions();
+        inscriptions.forEach(inscription -> {   //nparcouri liste taa inscrip w netfaked ken kol inscri aandha cours
+            Assert.notNull(inscription.getCours().getNumCours(),"Cours must be entered!!!");
+            Cours cours= c.findById(inscription.getCours().getNumCours()).orElse(null);
+            Assert.notNull(cours,"No cours found with this id!!!");
+            inscription.setCours(cours); //inscription aandou cours barka donc l inscrip houa li bech ygéri l relation et il va affecter inscrip lel cours
+            //taw ki bech ntestiw , exception handler
+        });
+        sk.saveAndFlush(skieur); //ken bech nhotha dekhel l for mch bech ysajel les controles de saisie donc nhotha l bara w naawed naamel for lel skieur
+        skieur.getInscriptions().forEach(inscription ->{
+            inscription.setSkieurs(skieur);
+            i.saveAndFlush(inscription);
+        });
+        return skieur;
     }
 
 

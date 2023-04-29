@@ -7,6 +7,7 @@ import tn.esprit.ds.skin_amal_chafter.entities.Skieur;
 import tn.esprit.ds.skin_amal_chafter.services.IServiceCours;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/cours")
@@ -42,5 +43,11 @@ public class CoursController {
     public void removeCours (@PathVariable Long numCours)
     {
         c.removeCours(numCours);
+    }
+   @GetMapping("numins")
+
+    public Set<Cours> findCoursByInscriptionsSQL()
+    {
+        return c.findCoursByInscriptionsSQL();
     }
 }

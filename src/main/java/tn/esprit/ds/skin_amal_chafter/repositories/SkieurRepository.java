@@ -12,6 +12,12 @@ public interface SkieurRepository extends JpaRepository<Skieur,Long> {
 
     List<Skieur> findSkieursByAbonnements_TypeAbon(TypeAbonnement typeAbon);
    //List<Skieur>findByInscriptionsCoursTypeCoursSupportAndPistesCouleur(TypeCours typeCours, Support support, Couleur couleur);
+
+    @Query(value = "select* from skieur s \n" +
+            "join abonnement a on s.abonnements_num_abon=a.num_abon\n" +
+            "where a.type_abon=:type_abon",nativeQuery = true)
+
+    List<Skieur> findSkieursByAbonnements_TypeAbonSQL(@Param("type_abon") TypeAbonnement typeAbon);
    List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours typeCours, Support support, Couleur couleur);
     @Query (value="SELECT * from skieur s \n" +
             "JOIN inscription i ON i.skieurs_num_skieur=s.num_skieur\n" +
